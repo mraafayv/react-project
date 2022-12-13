@@ -1,0 +1,13 @@
+.tools-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.tools-main-body {
+    background: rgb(248, 248, 248);
+    width: 95%;
+    height: 92%;
+    margin-left: auto;
+    padding: 16px;
+}

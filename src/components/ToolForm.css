@@ -1,0 +1,75 @@
+.tool-form {
+    background: #fff;
+    height: 100%;
+    border-radius: 4px;
+}
+
+
+.form-header {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    align-items: center;
+    border-bottom: 0.5px solid rgb(230, 230, 230);
+}
+
+.form-header h2 {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-header a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.form-body {
+    padding: 24px 8px 8px 8px;
+    height: 80%;
+}
+
+.form-body input,
+.form-body textarea{
+    height: 40px;
+    margin-top: 8px;
+    width: 100%;
+    background: rgb(240, 240, 240);
+    border: 0.2px solid rgb(230, 230, 230);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+
+
+.form-body textarea {
+    height: fit-content;
+    resize: none;
+}
+
+.form-footer {
+    font-weight: bold;
+    height: 10%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-footer button {
+    cursor: pointer;
+}
+
+.clear-btn {
+    background-color: white;
+    color: rgb(53, 53, 53);
+    border: 0.2px solid rgb(230, 230, 230);
+}
+
+.create-btn {
+    border: none;
+}
+
