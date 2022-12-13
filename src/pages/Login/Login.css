@@ -12,6 +12,9 @@
 .left-container .header {
   padding-top: 24px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .left-container form {

@@ -6,7 +6,7 @@
       "sampleOutputText": "Hey INK",
       "route": "hey-ink",
       "apiRoute": "command-ink",
-      "img": "/assets/tools_images/dark/Layer 2.png",
+      "img": "../assets/list-formatter.svg",
       "textInputs": [
         {
           "name": "Ask INK",
@@ -46,11 +46,11 @@
     {
       "id": 2,
       "name": "AI Image Generator",
-      "subtitle": "Create any image or art in seconds with the INK Image Generation AI. \n Subject to the INK <a href='https://inkforall.com/terms/' class='text-blue-400' target='_blank'> Terms & Conditions </a>",
+      "subtitle": "Create any image or art in seconds with the INK Image Generation AI. \n Subject to the INK",
       "sampleOutputText": "See your INK Images appear here after you answer the questions on the left.",
       "route": "image-generator",
       "apiRoute": "imagery-generate",
-      "img": "/assets/tools_images/dark/Layer 2.png",
+      "img": "../assets/AI-image-generator.svg",
       "textInputs": [
         {
           "name": "Prompt",
@@ -64,6 +64,7 @@
           "name": "Size",
           "key": "size",
           "type": "option",
+          "options": "['small', 'medium', 'large']",
           "placeholder": "small",
           "maxLimit": 400,
           "minLimit": 0
@@ -71,7 +72,7 @@
         {
           "name": "Number",
           "key": "number",
-          "type": "text",
+          "type": "number",
           "placeholder": "1",
           "maxLimit": 400,
           "minLimit": 0
@@ -86,7 +87,7 @@
       "sampleOutputText": "Facebook Primary Text Generator",
       "route": "facebook-primary-text-generator",
       "apiRoute": "facebook-primary-text-generator",
-      "img": "/assets/tools_images/dark/Layer 2.png",
+      "img": "../assets/AI-image-generator.svg",
       "textInputs": [
         {
           "name": "Ask INK",
@@ -130,7 +131,7 @@
       "sampleOutputText": "Bullet Text",
       "route": "bullet-text",
       "apiRoute": "bullet-text",
-      "img": "/assets/tools_images/dark/Layer 2.png",
+      "img": "../assets/AI-image-generator.svg",
       "textInputs": [
         {
           "name": "Ask INK",
@@ -174,7 +175,7 @@
       "sampleOutputText": "Call to Action",
       "route": "call-to-action",
       "apiRoute": "call-to-action",
-      "img": "/assets/tools_images/dark/Layer 2.png",
+      "img": "../assets/AI-image-generator.svg",
       "textInputs": [
         {
           "name": "Ask INK",
