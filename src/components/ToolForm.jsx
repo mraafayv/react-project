@@ -19,7 +19,7 @@ export default function ToolForm({ tool }) {
       <div className="form-body">
         
         {tool.textInputs.map(input => (
-          <label>
+          <label key={input.name}>
             <span>{input.name}</span>
             <input type={input.type} placeholder={input.placeholder}/>
           </label>
