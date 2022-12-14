@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useFetch = (url, method = "GET") => {
+export const useFetch = (url, method = "GET", token) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
@@ -10,12 +10,14 @@ export const useFetch = (url, method = "GET") => {
     setOptions({
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(postData),
     });
   };
 
+
+  
   useEffect(() => {
     const controller = new AbortController();
 
@@ -40,7 +42,7 @@ export const useFetch = (url, method = "GET") => {
           console.log("the fetch was aborted");
         } else {
           setIsPending(false);
-          setError("Could not fetch data!");
+          setError("Error!");
         }
       }
     };
@@ -50,6 +52,16 @@ export const useFetch = (url, method = "GET") => {
     }
     if(method === "POST" && options){
       fetchData(options);
+    }
+    if(method === "POST" && token){
+      setOptions({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": "bearer "+ token,
+        },
+        body: JSON.stringify(postData),
+      });
     }
 
     return () => {

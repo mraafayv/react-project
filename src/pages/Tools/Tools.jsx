@@ -6,6 +6,7 @@ import ToolsList from "../../components/ToolsList";
 import "./Tools.css";
 
 export default function Tools() {
+
   return (
     <div className="tools-page">
       <PageNav />

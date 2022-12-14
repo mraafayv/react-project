@@ -2,6 +2,7 @@ import Logo from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { useAuthContext } from "../hooks/useAuthCotext";
 import { useFetch } from "../hooks/useFetch";
 
 export default function LoginForm() {
@@ -10,10 +11,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  let user = {
-    email,
-    password,
-  };
+  const { dispatch } = useAuthContext();
 
   const { data, isPending, error, postData } = useFetch(
     "https://auth-system-production.up.railway.app/v1/api/auth/signin",
@@ -23,22 +21,21 @@ export default function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(user);
-    postData(user);
+    postData({
+      email,
+      password,
+    });
 
-    if (isPending) {
-      console.log("Loading...");
-    }
-
-    if (error) {
-      console.log(error.message);
-    }
-
-    if (data.success) {
+    if (data && data.success) {
+      console.log(data);
       navigate("/tools");
-      console.log(data.data.accessToken);
+      localStorage.setItem("accessToken", data.data.accessToken);
+      dispatch({ type: "LOGIN", payload: data.data.user });
+      // setUser(data.data.user);
+      // console.log(data.data.accessToken);
     }
   };
+
   return (
     <div className="left-container">
       <div className="header">
@@ -65,8 +62,10 @@ export default function LoginForm() {
           />
         </label>
 
-        <button>Log In</button>
+        <button disabled={isPending}>{isPending ? <p>Loading...</p> : <p>Log In</p> }</button>
       </form>
+
+      {error && <div className="error">{error}</div>}
 
       <p>
         Don't have an account? <Link to="/signup">Sign Up</Link>

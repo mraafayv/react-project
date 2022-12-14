@@ -33,7 +33,10 @@
     height: 80%;
 }
 
+
+
 .form-body input,
+.form-body select,
 .form-body textarea{
     height: 40px;
     margin-top: 8px;
@@ -64,9 +67,11 @@
 }
 
 .clear-btn {
+    cursor: pointer;
     background-color: white;
     color: rgb(53, 53, 53);
     border: 0.2px solid rgb(230, 230, 230);
+    text-align: center;
 }
 
 .create-btn {

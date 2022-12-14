@@ -3,44 +3,57 @@ import Logo from "../../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { useState } from "react";
+import { useAuthContext } from "../../hooks/useAuthCotext";
+// import { useSignup } from "../../hooks/useSignup";
 
 export default function Signup() {
+
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  let user = {
-    name,
-    email,
-    password,
-  };
 
-  const { data, isPending, error, postData } = useFetch(
-    "https://auth-system-production.up.railway.app/v1/api/auth/signup",
-    "POST"
-  );
+  const { dispatch } = useAuthContext()
+
+  const { data, isPending, error, postData } = useFetch("https://auth-system-production.up.railway.app/v1/api/auth/signup", "POST")
+
+
+  // let user = {
+  //   name,
+  //   email,
+  //   password,
+  // };
+
+  
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(user);
-    postData(user);
+    postData({
+      name,
+      email,
+      password
+    })
 
-    if (isPending) {
-      console.log("Loading...");
-    }
+    
 
-    if (error) {
-      console.log(error.message);
+    if (data && data.success) {
+      console.log(data)
+      navigate("/tools")
+      localStorage.setItem("accessToken", data.data.accessToken);
+      dispatch({type: 'LOGIN', payload: data.data.user})
+      // setUser(data.data.user);
+      // console.log(data.data.accessToken);
     }
+    
+  
 
-    if (data.success) {
-      navigate("/tools");
-      console.log(data.data.accessToken);
-    }
-  };
+  }
+
+  
 
   return (
     <div className="signup-page">
@@ -79,8 +92,10 @@ export default function Signup() {
               required
             />
           </label>
+          
 
-          <button>Sign Up</button>
+          <button disabled={isPending}>{isPending ? <p>Loading...</p> : <p>Sign Up</p> }</button>
+          {error && <div className="error">{error}</div>}
         </form>
 
         <label className="option">
