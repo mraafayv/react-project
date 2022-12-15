@@ -7,7 +7,7 @@ export default function Tool({ tool }) {
     
       <div className="tool-card">
         <div className="tool-image">
-          <img src={tool.img} alt="image of tool" />
+          <img src={tool.img} alt="tool" />
         </div>
 
         <div className="tool-body">

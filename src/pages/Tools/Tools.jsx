@@ -6,9 +6,12 @@ import ToolsList from "../../components/ToolsList";
 import "./Tools.css";
 
 export default function Tools() {
+
+  
+
   return (
     <div className="tools-page">
-      <PageNav />
+      <PageNav tools={tools} />
 
       <div className="tools-main-body">
         <h2>AI writing tools</h2>

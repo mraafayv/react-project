@@ -1,0 +1,7 @@
+.progress-bar .outer {
+    z-index: 2;
+    width: 160px;
+    height: 4px;
+    background-color: rgb(197, 27, 27);
+    border-radius: 24px;
+}
