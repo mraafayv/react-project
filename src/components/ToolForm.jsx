@@ -1,33 +1,74 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+// import { useFetch } from "../hooks/useFetch";
 
 import "./ToolForm.css";
 
-
-
-
-export default function ToolForm({ tool }) {
+export default function ToolForm({ tool, setResult, setPendingResult }) {
   const [prompt, setPrompt] = useState("");
-  const [size, setSize] = useState("");
-  const [number, setNumber] = useState(0);
+  const [size, setSize] = useState("small");
+  const [n, setN] = useState('');
+  const [isPending, setIsPending] = useState(false);
 
+  // const {data, isPending, error, postData} = useFetch('https://auth-system-production.up.railway.app/v1/api/user/profile', localStorage.getItem('accessToken'))
 
+  const postData = { prompt, n: parseInt(n), size };
 
-  
-const handleSubmit = (e) => {
-  e.preventDefault();
+  let token = localStorage.getItem("accessToken");
 
-  if(number > 3){
-   throw Error("Number Can't be greater than 3")
-  }
+  const handleSubmit = (e) => {
+    setIsPending(true);
+    e.preventDefault();
 
-  if(localStorage.getItem('accessToken')){
-    console.log("User exists")
-  }
-  
-}
+    if (token) {
+      setPendingResult(true)
+      setResult(null)
 
+      //check if access token is valid
+      fetch(
+        "https://auth-system-production.up.railway.app/v1/api/user/profile",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            console.log(postData);
+            //image generator tool call
+            fetch(
+              "https://auth-system-production.up.railway.app/v1/api/openai/image-generator",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": "Bearer " + token,
+                },
+                body: JSON.stringify(postData),
+              }
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                setResult(data)
+                setPendingResult(false);
 
+              })
+              .catch((err) => console.log(err.message));
+          }
+          setIsPending(false);
+        })
+        .catch((err) => {
+          console.log(err.message);
+          setIsPending(false);
+        });
+
+      // console.log("User exists")
+    }
+  };
 
   return (
     <div className="tool-form">
@@ -72,24 +113,27 @@ const handleSubmit = (e) => {
                       console.log(opt)
                     )} */}
 
-                   {JSON.parse(input?.options?.replace(/'/g, '"')).map((opt) => 
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
+                    {JSON.parse(input?.options?.replace(/'/g, '"')).map(
+                      (opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      )
                     )}
-
                   </select>
                 </label>
               )) ||
-              (input.type === "number" && (
+              (input.type === "text" && (
                 <label key={input.key} htmlFor={input.key}>
                   <span>{input.name}</span>
                   <input
                     type={input.type}
                     placeholder={input.placeholder}
                     name={input.name}
-                    onChange={(e) => setNumber(e.target.value)}
-                    value={number}
+                    onChange={(e) => setN(e.target.value)}
+                    value={n}
+                    min={input.minLimit}
+                    max={input.maxLimit}
                     required
                   />
                 </label>
@@ -100,7 +144,15 @@ const handleSubmit = (e) => {
         <div className="form-footer">
           <input type="reset" className="btn clear-btn" value="Clear Input" />
 
-          <button className="btn create-btn">Create</button>
+          {isPending ? (
+            <button className="btn create-btn" disabled={isPending}>
+              Loading...
+            </button>
+          ) : (
+            <button className="btn create-btn" disabled={isPending}>
+              Create
+            </button>
+          )}
         </div>
       </form>
     </div>

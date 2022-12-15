@@ -6,6 +6,8 @@ export const useFetch = (url, method = "GET", token) => {
   const [error, setError] = useState(null);
   const [options, setOptions] = useState(null);
 
+
+
   const postData = (postData) => {
     setOptions({
       method: "POST",
@@ -16,6 +18,30 @@ export const useFetch = (url, method = "GET", token) => {
     });
   };
 
+
+// if(token){
+//     setOptions({
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": "Bearer "+ token
+//       },
+//       body: JSON.stringify(postData),
+//     });
+  
+// }
+
+// if(!token){
+//   setOptions({
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(postData),
+//   });
+// }
+
+ 
 
   
   useEffect(() => {
@@ -53,16 +79,7 @@ export const useFetch = (url, method = "GET", token) => {
     if(method === "POST" && options){
       fetchData(options);
     }
-    if(method === "POST" && token){
-      setOptions({
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": "bearer "+ token,
-        },
-        body: JSON.stringify(postData),
-      });
-    }
+    
 
     return () => {
       controller.abort();

@@ -1,6 +1,6 @@
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.svg"
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../hooks/useAuthCotext";
 import { useFetch } from "../hooks/useFetch";
@@ -16,7 +16,22 @@ export default function LoginForm() {
   const { data, isPending, error, postData } = useFetch(
     "https://auth-system-production.up.railway.app/v1/api/auth/signin",
     "POST"
-  );
+  )
+
+  useEffect(()=> {
+
+    if (data?.success && data?.data) {
+      // console.log(data);
+      
+      localStorage.setItem("accessToken", data.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
+      dispatch({ type: "LOGIN", payload: data.data.user });
+      navigate("/tools");
+
+      // setUser(data.data.user);
+      // console.log(data.data.accessToken);
+    }
+  }, [dispatch, navigate, data])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,15 +41,8 @@ export default function LoginForm() {
       password,
     });
 
-    if (data && data.success) {
-      console.log(data);
-      navigate("/tools");
-      localStorage.setItem("accessToken", data.data.accessToken);
-      dispatch({ type: "LOGIN", payload: data.data.user });
-      // setUser(data.data.user);
-      // console.log(data.data.accessToken);
-    }
-  };
+    
+  }
 
   return (
     <div className="left-container">
@@ -49,6 +57,7 @@ export default function LoginForm() {
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
+            value={email}
             required
           />
         </label>
@@ -58,11 +67,14 @@ export default function LoginForm() {
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
             required
           />
         </label>
 
-        <button disabled={isPending}>{isPending ? <p>Loading...</p> : <p>Log In</p> }</button>
+        <button disabled={isPending}>
+          {isPending ? <p>Loading...</p> : <p>Log In</p>}
+        </button>
       </form>
 
       {error && <div className="error">{error}</div>}

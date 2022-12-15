@@ -6,7 +6,7 @@
       "sampleOutputText": "Hey INK",
       "route": "hey-ink",
       "apiRoute": "command-ink",
-      "img": "../assets/list-formatter.svg",
+      "img": "../assets/paragraph-generator.svg",
       "textInputs": [
         {
           "name": "Ask INK",
@@ -72,10 +72,10 @@
         {
           "name": "Number",
           "key": "number",
-          "type": "number",
+          "type": "text",
           "placeholder": "1",
-          "maxLimit": 400,
-          "minLimit": 0
+          "maxLimit": 3,
+          "minLimit": 1
         }
       ],
       "status": "NEW!"
@@ -87,7 +87,7 @@
       "sampleOutputText": "Facebook Primary Text Generator",
       "route": "facebook-primary-text-generator",
       "apiRoute": "facebook-primary-text-generator",
-      "img": "../assets/AI-image-generator.svg",
+      "img": "../assets/sentence-expander.svg",
       "textInputs": [
         {
           "name": "Ask INK",
@@ -131,7 +131,7 @@
       "sampleOutputText": "Bullet Text",
       "route": "bullet-text",
       "apiRoute": "bullet-text",
-      "img": "../assets/AI-image-generator.svg",
+      "img": "../assets/subheading-generator.svg",
       "textInputs": [
         {
           "name": "Ask INK",
@@ -175,7 +175,7 @@
       "sampleOutputText": "Call to Action",
       "route": "call-to-action",
       "apiRoute": "call-to-action",
-      "img": "../assets/AI-image-generator.svg",
+      "img": "../assets/list-formatter.svg",
       "textInputs": [
         {
           "name": "Ask INK",

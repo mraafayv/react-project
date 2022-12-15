@@ -37,6 +37,14 @@
 
 }
 
+.generated-image {
+    width: 260px;
+    height: 260px;
+    margin: 4px;
+    border: 1px solid rgb(226, 226, 226);
+    box-shadow: 2px 4px 12px rgb(224, 224, 224);
+}
+
 .right-container-body{
     height: 90%;
     display: flex;

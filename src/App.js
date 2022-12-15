@@ -31,11 +31,11 @@ function App() {
                 <Route
                   path={`/tools/${tool.route}`}
                   key={tool.id}
-                  element={<p>Coming Soon</p>}
+                  element={<p className="coming-soon">Coming Soon</p>}
                 />
               )
             )}
-            <Route path="*" element={<p>Resource not found</p>} />
+            <Route path="*" element={<p className="invalid">Invalid URL! Resource not found</p>} />
           </Routes>
       </BrowserRouter>
     </div>

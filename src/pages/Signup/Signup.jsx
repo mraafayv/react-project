@@ -2,7 +2,7 @@ import "./Signup.css";
 import Logo from "../../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthCotext";
 // import { useSignup } from "../../hooks/useSignup";
 
@@ -18,15 +18,6 @@ export default function Signup() {
   const { dispatch } = useAuthContext()
 
   const { data, isPending, error, postData } = useFetch("https://auth-system-production.up.railway.app/v1/api/auth/signup", "POST")
-
-
-  // let user = {
-  //   name,
-  //   email,
-  //   password,
-  // };
-
-  
   
 
   const handleSubmit = (e) => {
@@ -44,6 +35,7 @@ export default function Signup() {
       console.log(data)
       navigate("/tools")
       localStorage.setItem("accessToken", data.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
       dispatch({type: 'LOGIN', payload: data.data.user})
       // setUser(data.data.user);
       // console.log(data.data.accessToken);

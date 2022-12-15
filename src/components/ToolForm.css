@@ -2,6 +2,9 @@
     background: #fff;
     height: 100%;
     border-radius: 4px;
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
 }
 
 
@@ -40,6 +43,7 @@
 .form-body textarea{
     height: 40px;
     margin-top: 8px;
+    margin-bottom: 28px;
     width: 100%;
     background: rgb(240, 240, 240);
     border: 0.2px solid rgb(230, 230, 230);
@@ -50,8 +54,12 @@
 
 
 .form-body textarea {
-    height: fit-content;
+    height: 80px;
     resize: none;
+}
+
+.form-body label {
+    margin-bottom: 12px;
 }
 
 .form-footer {
