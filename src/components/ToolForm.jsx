@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./ToolForm.css";
 
-export default function ToolForm({ tool, setResult, setPendingResult }) {
+export default function ToolForm({ tool, setResult, setPendingResult, setAuthorized }) {
   const [prompt, setPrompt] = useState("");
   const [size, setSize] = useState("small");
   const [n, setN] = useState('');
@@ -38,7 +38,8 @@ export default function ToolForm({ tool, setResult, setPendingResult }) {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            console.log(postData);
+            setAuthorized(true);
+            // console.log(postData);
             //image generator tool call
             fetch(
               "https://auth-system-production.up.railway.app/v1/api/openai/image-generator",
@@ -55,11 +56,17 @@ export default function ToolForm({ tool, setResult, setPendingResult }) {
               .then((data) => {
                 setResult(data)
                 setPendingResult(false);
+                setIsPending(false);
 
               })
-              .catch((err) => console.log(err.message));
+              .catch((err) => {
+                console.log(err.message)
+              });
           }
-          setIsPending(false);
+          else if(!data.success){
+            setAuthorized(false);
+
+          }
         })
         .catch((err) => {
           console.log(err.message);
